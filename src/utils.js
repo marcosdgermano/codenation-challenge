@@ -26,3 +26,6 @@ exports.alphabet = [
     'y',
     'z',
 ];
+
+exports.getUrl = 'https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=57861f6450c8f07d0d0d281b22ee269ab650feee';
+exports.postUrl = 'https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=57861f6450c8f07d0d0d281b22ee269ab650feee';

@@ -1,30 +1,27 @@
 const sha1 = require('js-sha1');
 const fs = require('fs');
-const FormData = require('form-data');
-const api = require('./src/api');
+const request = require('request');
 const { getMessage, decode, saveJSON } = require('./src/helpers.js');
+const { postUrl } = require('./src/utils');
 
-const main = async () => {
+const resolveChallenge = async () => {
     const message = await getMessage();
-    console.log('message >>>>>>>', message);
+    console.log('message >>>>>>>>>>', message);
     message.decifrado = decode(message);
     message.resumo_criptografico = sha1(message.decifrado);
     saveJSON('answer.json', message);
 }
 
-main();
 
-let formData = new FormData();
-formData.append('file', formData);
+resolveChallenge();
 
 // const formData = {
 //     answer: fs.createReadStream("answer.json"),
 // };
 
-api.post('/submit-solution?token=57861f6450c8f07d0d0d281b22ee269ab650feee', formData)
-    .then(response => {
-        console.log('response >>>>>>', response);
-      })
-    .catch(e => {
-        console.log('error >>>>>>', e);
-    });
+// request.post({ url: postUrl, formData }, function optionalCallback(err, httpResponse, body) {
+//     if (err) {
+//         return console.error("upload failed:", err);
+//     }
+//     console.log("Upload successful!  Server responded with:", body);
+// });

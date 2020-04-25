@@ -1,22 +1,15 @@
 const api = require('./api.js');
-const request = require('request');
 const fs = require('fs');
 const { alphabet } = require('./utils');
 
 const getMessage = async () => {
-    let response;
-    
-    await request.get('https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=57861f6450c8f07d0d0d281b22ee269ab650feee', async (err, res, body) => {
-        if (err) {
-            console.log('err >>>>>>>>>', e);
-            response = null;
-        }
-        await console.log('body >>>>>>>>', JSON.parse(body));
-        response = JSON.parse(body);
-    });
-
-    console.log('response >>>>>>>>', response);
-    return response;
+    try {
+        const response = await api.get('/generate-data?token=57861f6450c8f07d0d0d281b22ee269ab650feee');
+        return response.data;
+    } catch(e) {
+        console.log('err >>>>>>>>>', e);
+        return null;
+    }
 }
 
 const getIndex = (baseIndex) => {
